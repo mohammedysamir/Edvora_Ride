@@ -12,7 +12,7 @@ import java.util.*
  * state: represents source state of the ride
  * city: represents source city of the ride
  * */
-class Ride(id:String, private val path:Array<Int>, date:Date, map: URL, state:String, city:String) {
+class Ride(val id:String, private val path:Array<Int>, val date:Date, val map: URL, val state:String, val city:String) {
 
     fun getPath():Array<Int>{return path}
     fun getOriginStation():Int{return path[0]}
