@@ -14,6 +14,7 @@ import java.util.*
  * */
 class Ride(id:String, private val path:Array<Int>, date:Date, map: URL, state:String, city:String) {
 
+    fun getPath():Array<Int>{return path}
     fun getOriginStation():Int{return path[0]}
     fun getDestinationStation():Int{return path[path.size-1]}
 }
