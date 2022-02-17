@@ -6,7 +6,7 @@ import java.net.URL
 * name: user name
 * station code: user location in terms of stations
 * */
-class User(private val name: String, private val stationCode: Int, private val profileURL: URL?) {
+class User(private val name: String, private val stationCode: Int, private val profileURL: String) {
     fun computeMinDistance(r: Ride): Int {
         var minDistance: Int = 0
         for (station in r.getPath()) {
@@ -26,7 +26,7 @@ class User(private val name: String, private val stationCode: Int, private val p
         return stationCode
     }
 
-    fun getUserProfile(): URL? {
+    fun getUserProfile(): String {
         return profileURL
     }
 }
