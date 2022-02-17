@@ -5,4 +5,5 @@
     <string name="station_path">station path: %1$s</string>
     <string name="date">Date: %1$s</string>
     <string name="distance">Distance: %1$d</string>
+    <string name="tag_line">Pick a safe ride</string>
 </resources>
