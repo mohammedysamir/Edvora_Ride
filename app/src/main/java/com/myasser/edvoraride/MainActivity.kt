@@ -3,10 +3,8 @@ package com.myasser.edvoraride
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.media.Image
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.*
@@ -133,6 +131,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
         //2. create adapter for the viewPager and pass list of fragments to it
         viewPager.adapter = ViewPagerAdapter(fragmentList, this@MainActivity)
 
+        //to integrate tabLayout with viewPager
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 tabLayout.selectTab(tabLayout.getTabAt(position))
@@ -159,16 +158,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
         //fill city state map with provided cities and states
         for (r in rides)
             cityStateMap[r.city] = r.state
-//
-//        //identify spinners
-//        val stateSpinner = findViewById<Spinner>(R.id.state_spinner)
-//        val citySpinner = findViewById<Spinner>(R.id.city_spinner)
-//        //assign on selected listeners
-//        stateSpinner.onItemSelectedListener = this
-//        citySpinner.onItemSelectedListener = this
-//        //get each spinner arrays
-//        stateSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, cityStateMap.keys.toTypedArray())
-//        citySpinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, cityStateMap.values.toTypedArray())
     }
 
     override fun onBackPressed() {
@@ -240,7 +229,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
         //Notify each fragment .. couldn't find more generic way :'(
         NearestFragment.apply {
             originalRides = filteredRides
-            recyclerView.adapter = RideRecyclerView(filteredRides, user)
+            recyclerView.adapter = RideRecyclerView(filterRidesByDate(filteredRides, true), user)
         }
         if (viewPager.currentItem == 1) {
             UpcomingFragment.apply {

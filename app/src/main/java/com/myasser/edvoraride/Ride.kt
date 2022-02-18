@@ -12,9 +12,17 @@ import java.time.LocalDateTime
  * state: represents source state of the ride
  * city: represents source city of the ride
  * */
-class Ride(val id:String, private val path:Array<Int>, val date: LocalDateTime, val map: URL?, val state:String, val city:String) {
+class Ride(val id: String, private val path: Array<Int>, val date: LocalDateTime, val map: URL?, val state: String, val city: String) {
 
-    fun getPath():Array<Int>{return path}
-    fun getOriginStation():Int{return path[0]}
-    fun getDestinationStation():Int{return path[path.size-1]}
+    fun getPath(): Array<Int> {
+        return path
+    }
+
+    fun getOriginStation(): Int {
+        return path[0]
+    }
+
+    fun getDestinationStation(): Int {
+        return path[path.size - 1]
+    }
 }

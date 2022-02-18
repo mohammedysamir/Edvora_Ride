@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.time.LocalDateTime
-import kotlin.collections.ArrayList
 
 class UpcomingFragment : Fragment() {
     private lateinit var currentDate: LocalDateTime
