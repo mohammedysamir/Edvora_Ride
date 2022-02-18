@@ -23,10 +23,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <view
+            <ImageView
                 android:id="@+id/ride_map"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/map" />
 
 
         </androidx.cardview.widget.CardView>
