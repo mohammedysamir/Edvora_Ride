@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="230dp"
-    android:layout_height="190dp"
-    android:layout_alignParentEnd="true"
+    android:layout_height="210dp"
     app:cardBackgroundColor="#000000"
     app:cardCornerRadius="15dp">
 
@@ -26,7 +25,7 @@
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/state_spinner"
             android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/city_state_card"
             android:backgroundTint="#232323"
@@ -39,7 +38,7 @@
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/city_spinner"
             android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginTop="15dp"
             android:padding="10dp"
             android:background="@drawable/city_state_card"
