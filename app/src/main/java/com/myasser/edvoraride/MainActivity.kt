@@ -242,15 +242,33 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
             originalRides = filteredRides
             recyclerView.adapter = RideRecyclerView(filteredRides, user)
         }
-        UpcomingFragment.apply {
-            recyclerView.adapter = RideRecyclerView(filteredRides, user)
+        if (viewPager.currentItem == 1) {
+            UpcomingFragment.apply {
+                recyclerView.adapter = RideRecyclerView(
+                        filterRidesByDate(filteredRides, true), user)
+            }
         }
-        PastFragment.apply {
-            recyclerView.adapter = RideRecyclerView(filteredRides, user)
+        if (viewPager.currentItem == 2) {
+            PastFragment.apply {
+                recyclerView.adapter = RideRecyclerView(filterRidesByDate(filteredRides, false), user)
+            }
         }
-        //TODO: filter again by date before passing to Upcoming and past fragments
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
+    }
+
+    private fun filterRidesByDate(filtered: ArrayList<Ride>, isAfter: Boolean): ArrayList<Ride> {
+        val finalRides = ArrayList<Ride>()
+        val tempRides = filtered.sortedWith(compareBy {
+            it.date
+        }).toTypedArray()
+
+        for (r in tempRides) //iterate through sorted original rides
+            if (isAfter && (r.date.isAfter(LocalDateTime.now()) || r.date == LocalDateTime.now())) //filter based on date
+                finalRides.add(r)
+            else if (!isAfter && (r.date.isBefore(LocalDateTime.now())))
+                finalRides.add(r)
+        return finalRides
     }
 }
