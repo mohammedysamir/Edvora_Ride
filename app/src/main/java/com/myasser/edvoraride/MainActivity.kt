@@ -205,8 +205,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
                 citySpinner.adapter = ArrayAdapter(this, R.layout.custom_spinner_item, cityStateMap.keys.toTypedArray().distinct())
 
                 dialog.show()
-                //whenever content change send to the selected fragment the updated state,city
-                //this part is done in onItemSelected
             }
         }
     }
@@ -225,7 +223,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
         when (p0?.id) {
             R.id.state_spinner -> {
                 selectedState = stateList[position]
-                //TODO: on state changes, update city list
                 val updatedCityList = cityStateMap.filterValues { it == selectedState }.keys.toTypedArray().distinct()//filter cities based on selected state
                 citySpinner.adapter = ArrayAdapter(p0.context, R.layout.custom_spinner_item, updatedCityList)
                 cityList = updatedCityList
@@ -234,11 +231,26 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
                 selectedCity = cityList[position]
             }
         }
-        //TODO: Mark selected city/state
-        //TODO: notify fragment to update recyclerview content
+
+        // notify fragment to update recyclerview content
+        val filteredRides = rides.filter {
+            it.city == selectedCity && it.state == selectedState
+        } as ArrayList<Ride>
+
+        //Notify each fragment .. couldn't find more generic way :'(
+        NearestFragment.apply {
+            originalRides = filteredRides
+            recyclerView.adapter = RideRecyclerView(filteredRides, user)
+        }
+        UpcomingFragment.apply {
+            recyclerView.adapter = RideRecyclerView(filteredRides, user)
+        }
+        PastFragment.apply {
+            recyclerView.adapter = RideRecyclerView(filteredRides, user)
+        }
+        //TODO: filter again by date before passing to Upcoming and past fragments
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
-        TODO("Not yet implemented")
     }
 }

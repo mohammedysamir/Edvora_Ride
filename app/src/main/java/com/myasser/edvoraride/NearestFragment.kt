@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -13,7 +14,13 @@ class NearestFragment : Fragment() {
 
     private lateinit var nearestRides: Array<Ride>
     private val mainUser = MainActivity.user
-    private val originalRides = MainActivity.rides
+    companion object{
+        lateinit var originalRides:ArrayList<Ride>
+        lateinit var recyclerView: RecyclerView
+    }
+    init {
+        originalRides=MainActivity.rides
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,9 +39,9 @@ class NearestFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_nearest, container, false)
         val linearLayoutManager = LinearLayoutManager(context)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.nearest_recycler_view)
-        recyclerView?.layoutManager = linearLayoutManager
-        recyclerView?.adapter = RideRecyclerView(nearestRides.toCollection(ArrayList()), mainUser)
+        recyclerView = view.findViewById(R.id.nearest_recycler_view)
+        recyclerView.layoutManager = linearLayoutManager
+        recyclerView.adapter = RideRecyclerView(nearestRides.toCollection(ArrayList()), mainUser)
 
         // Inflate the layout for this fragment
         return view

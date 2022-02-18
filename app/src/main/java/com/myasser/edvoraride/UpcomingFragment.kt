@@ -16,10 +16,19 @@ class UpcomingFragment : Fragment() {
     private lateinit var currentDate: LocalDateTime
     private lateinit var upcomingRides: ArrayList<Ride>
 
+    companion object {
+        lateinit var originalRides: ArrayList<Ride>
+        lateinit var recyclerView: RecyclerView
+
+    }
+
+    init {
+        originalRides = MainActivity.rides
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val originalRides = MainActivity.rides
         upcomingRides = ArrayList()
         currentDate = LocalDateTime.now()
         //sorted ascending by date
@@ -28,7 +37,7 @@ class UpcomingFragment : Fragment() {
         }).toTypedArray()
 
         for (r in sortedOriginal) //iterate through sorted original rides
-            if (r.date.isAfter(currentDate)) //filter based on date
+            if (r.date.isAfter(currentDate) || r.date == currentDate) //filter based on date
                 upcomingRides.add(r)
 
     }
@@ -39,9 +48,9 @@ class UpcomingFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_upcoming, container, false)
         val linearLayoutManager = LinearLayoutManager(context)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.upcoming_recycler_view)
-        recyclerView?.layoutManager = linearLayoutManager
-        recyclerView?.adapter = RideRecyclerView(upcomingRides, MainActivity.user)
+        recyclerView = view.findViewById(R.id.upcoming_recycler_view)
+        recyclerView.layoutManager = linearLayoutManager
+        recyclerView.adapter = RideRecyclerView(upcomingRides, MainActivity.user)
 
         // Inflate the layout for this fragment
         return view
