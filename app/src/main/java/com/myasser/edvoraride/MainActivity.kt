@@ -1,19 +1,13 @@
 package com.myasser.edvoraride
 
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.view.get
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
-import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 import java.time.LocalDateTime
 import java.time.Month
 
@@ -23,14 +17,13 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         lateinit var user: User
-
         //handle set of rides available locally
         lateinit var rides: ArrayList<Ride>
     }
 
     init {
         //initiate rides list
-        rides = ArrayList<Ride>()
+        rides = ArrayList()
         rides.add(
                 Ride(
                         "001",
