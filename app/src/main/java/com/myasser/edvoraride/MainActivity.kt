@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         lateinit var user: User
+
         //handle set of rides available locally
         lateinit var rides: ArrayList<Ride>
     }
@@ -31,36 +32,66 @@ class MainActivity : AppCompatActivity() {
         //initiate rides list
         rides = ArrayList<Ride>()
         rides.add(
-            Ride(
-                "001",
-                arrayOf(23, 42, 45, 48, 56, 60, 77, 81, 93),
-                LocalDateTime.of(2022, Month.FEBRUARY, 15, 16, 33),
-                null,
-                "Maharashtra",
-                "Panvel"
-            )
+                Ride(
+                        "001",
+                        arrayOf(23, 42, 45, 48, 56, 60, 77, 81, 93),
+                        LocalDateTime.of(2022, Month.FEBRUARY, 13, 16, 33),
+                        null,
+                        "Maharashtra",
+                        "Mumbai"
+                )
         )
 
         rides.add(
-            Ride(
-                "002",
-                arrayOf(20, 39, 40, 42, 54, 63, 72, 88, 98),
-                LocalDateTime.of(2022, Month.FEBRUARY, 15, 16, 33),
-                null,
-                "Maharashtra",
-                "Panvel"
-            )
+                Ride(
+                        "002",
+                        arrayOf(20, 39, 40, 42, 54, 63, 72, 88, 98),
+                        LocalDateTime.of(2022, Month.MARCH, 15, 13, 0),
+                        null,
+                        "Maharashtra",
+                        "Panvel"
+                )
         )
 
         rides.add(
-            Ride(
-                "003",
-                arrayOf(13, 25, 41, 48, 59, 64, 75, 81, 91),
-                LocalDateTime.of(2022, Month.FEBRUARY, 15, 16, 33),
-                null,
-                "Maharashtra",
-                "Panvel"
-            )
+                Ride(
+                        "003",
+                        arrayOf(13, 25, 41, 48, 59, 64, 75, 81, 91),
+                        LocalDateTime.of(2022, Month.MARCH, 1, 9, 0),
+                        null,
+                        "Maharashtra",
+                        "Mumbai"
+                )
+        )
+        rides.add(
+                Ride(
+                        "004",
+                        arrayOf(9, 16, 28, 41, 44, 53, 65, 77, 96),
+                        LocalDateTime.of(2022, Month.FEBRUARY, 17, 12, 30),
+                        null,
+                        "Maharashtra",
+                        "Panvel"
+                )
+        )
+        rides.add(
+                Ride(
+                        "005",
+                        arrayOf(10, 21, 33, 44, 63, 69, 75, 87, 98),
+                        LocalDateTime.of(2022, Month.MARCH, 3, 8, 30),
+                        null,
+                        "Manipur",
+                        "Imphal West"
+                )
+        )
+        rides.add(
+                Ride(
+                        "006",
+                        arrayOf(3, 19, 34, 47, 52, 65, 75, 82, 98),
+                        LocalDateTime.of(2022, Month.FEBRUARY, 28, 7, 15),
+                        null,
+                        "Manipur",
+                        "Chandel"
+                )
         )
 
     }
@@ -70,9 +101,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         user = User(
-            "Dhruv Singh",
-            40,
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2eN8ZS-WW7HqmiOGKHDdLV8qUEKOU5b3bZg&usqp=CAU"
+                "Dhruv Singh",
+                40,
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2eN8ZS-WW7HqmiOGKHDdLV8qUEKOU5b3bZg&usqp=CAU"
         )
         initUserData(user)
 
@@ -80,9 +111,9 @@ class MainActivity : AppCompatActivity() {
         viewPager = findViewById(R.id.view_pager)
         //1. create list of fragments
         val fragmentList: ArrayList<Fragment> = arrayListOf(
-            NearestFragment(),
-            UpcomingFragment(),
-            PastFragment()
+                NearestFragment(),
+                UpcomingFragment(),
+                PastFragment()
         )
         //2. create adapter for the viewPager and pass list of fragments to it
         viewPager.adapter = ViewPagerAdapter(fragmentList, this@MainActivity)
@@ -94,7 +125,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         tabLayout.addOnTabSelectedListener(object :
-            TabLayout.OnTabSelectedListener {
+                TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 viewPager.currentItem = tab?.position!!
             }
@@ -120,6 +151,6 @@ class MainActivity : AppCompatActivity() {
     private fun initUserData(user: User) {
         findViewById<TextView>(R.id.user_name).text = user.getUserName()
         //TODO: be able to initiate user's image from URL
-    // Glide.with(this).load(user.getUserProfile()).into(findViewById<ImageView>(R.id.user_image))
+        // Glide.with(this).load(user.getUserProfile()).into(findViewById<ImageView>(R.id.user_image))
     }
 }
