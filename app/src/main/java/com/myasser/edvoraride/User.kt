@@ -1,6 +1,7 @@
 package com.myasser.edvoraride
 
-import java.net.URL
+import kotlin.math.abs
+
 /*
 *Data class to store user information & compute minimum distance with specific ride
 * name: user name
@@ -8,11 +9,10 @@ import java.net.URL
 * */
 class User(private val name: String, private val stationCode: Int, private val profileURL: String) {
     fun computeMinDistance(r: Ride): Int {
-        var minDistance: Int = 0
+        var minDistance = Int.MAX_VALUE
         for (station in r.getPath()) {
-            //iterate to get minimum distance > 0
-            val currentDifference = station - this.stationCode
-            if (currentDifference < minDistance && currentDifference >= 0) //to avoid negative distance
+            val currentDifference = abs(station - this.stationCode)
+            if (currentDifference <= minDistance)
                 minDistance = currentDifference
         }
         return minDistance

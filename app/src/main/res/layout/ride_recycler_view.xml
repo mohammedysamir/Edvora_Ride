@@ -2,20 +2,22 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ride_card"
-    android:layout_width="300dp"
+    android:layout_width="340dp"
     android:layout_height="420dp"
     android:layout_gravity="center_horizontal"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
     app:cardBackgroundColor="@color/dark_grey"
     app:cardCornerRadius="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp">
+        android:padding="20dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/map_card"
-            android:layout_width="270dp"
+            android:layout_width="290dp"
             android:layout_height="150dp"
             android:layout_marginTop="10dp"
             app:cardCornerRadius="5dp"

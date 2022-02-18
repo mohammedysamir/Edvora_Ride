@@ -34,8 +34,11 @@ class RideRecyclerView(private val mList: ArrayList<Ride>, private val user: Use
         holder.rideId.text = mContext.getString(R.string.ride_id, ride.id) //place ride id
         holder.rideOriginStation.text = mContext.getString(R.string.origin_station, ride.getOriginStation())
         //create string path from the array of stations
-        var finalPath = ""
-        for (s in ride.getPath()) finalPath += s.toString()
+        var finalPath = "["
+        for (s in ride.getPath()) finalPath += s.toString()+','
+        val length=finalPath.length
+        finalPath=finalPath.substring(0,length-1)+']'
+
         holder.ridePath.text = mContext.getString(R.string.station_path, finalPath)
         holder.rideDate.text = mContext.getString(R.string.date, ride.date.toString())
 

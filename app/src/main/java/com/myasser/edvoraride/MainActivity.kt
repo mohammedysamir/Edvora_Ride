@@ -19,10 +19,10 @@ import java.time.Month
 
 @RequiresApi(Build.VERSION_CODES.O)
 class MainActivity : AppCompatActivity() {
-    lateinit var user: User
     lateinit var viewPager: ViewPager2
 
     companion object {
+        lateinit var user: User
         //handle set of rides available locally
         lateinit var rides: ArrayList<Ride>
     }
@@ -119,6 +119,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initUserData(user: User) {
         findViewById<TextView>(R.id.user_name).text = user.getUserName()
-        Glide.with(this).load(user.getUserProfile()).into(findViewById<ImageView>(R.id.user_image))
+        //TODO: be able to initiate user's image from URL
+    // Glide.with(this).load(user.getUserProfile()).into(findViewById<ImageView>(R.id.user_image))
     }
 }
