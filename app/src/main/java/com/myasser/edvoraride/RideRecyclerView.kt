@@ -1,10 +1,14 @@
 package com.myasser.edvoraride
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class RideRecyclerView(private val mList: ArrayList<Ride>, private val user: User) :
         RecyclerView.Adapter<RideRecyclerView.ViewHolder>() {
@@ -26,6 +30,7 @@ class RideRecyclerView(private val mList: ArrayList<Ride>, private val user: Use
         )
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val mContext = holder.itemView.context
         val ride = mList[position]
@@ -35,12 +40,13 @@ class RideRecyclerView(private val mList: ArrayList<Ride>, private val user: Use
         holder.rideOriginStation.text = mContext.getString(R.string.origin_station, ride.getOriginStation())
         //create string path from the array of stations
         var finalPath = "["
-        for (s in ride.getPath()) finalPath += s.toString()+','
-        val length=finalPath.length
-        finalPath=finalPath.substring(0,length-1)+']'
+        for (s in ride.getPath()) finalPath += s.toString() + ','
+        val length = finalPath.length
+        finalPath = finalPath.substring(0, length - 1) + ']'
 
         holder.ridePath.text = mContext.getString(R.string.station_path, finalPath)
-        holder.rideDate.text = mContext.getString(R.string.date, ride.date.toString())
+        holder.rideDate.text = mContext.getString(R.string.date,
+                LocalDateTime.parse(ride.date.toString(), DateTimeFormatter.ISO_DATE_TIME).format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")))
 
         //identify our user and calculate minimum distance
         holder.rideDistance.text =
