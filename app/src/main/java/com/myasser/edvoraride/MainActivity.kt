@@ -2,6 +2,7 @@ package com.myasser.edvoraride
 
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -12,11 +13,13 @@ import java.time.LocalDateTime
 import java.time.Month
 
 @RequiresApi(Build.VERSION_CODES.O)
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var viewPager: ViewPager2
+    lateinit var cityStateMap: HashMap<String, String> //v: state, k:city
 
     companion object {
         lateinit var user: User
+
         //handle set of rides available locally
         lateinit var rides: ArrayList<Ride>
     }
@@ -93,6 +96,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        cityStateMap = HashMap()
         user = User(
                 "Dhruv Singh",
                 40,
@@ -132,6 +136,11 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
+
+        //fill city state map with provided cities and states
+        for (r in rides)
+            cityStateMap[r.city] = r.state
     }
 
     override fun onBackPressed() {
@@ -145,5 +154,16 @@ class MainActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.user_name).text = user.getUserName()
         //TODO: be able to initiate user's image from URL
         // Glide.with(this).load(user.getUserProfile()).into(findViewById<ImageView>(R.id.user_image))
+    }
+
+    override fun onClick(p0: View?) {
+        when (p0?.id) {
+            R.id.filter -> {
+                //display filter dialog
+
+                //whenever content change send to the selected fragment the updated state,city
+
+            }
+        }
     }
 }
