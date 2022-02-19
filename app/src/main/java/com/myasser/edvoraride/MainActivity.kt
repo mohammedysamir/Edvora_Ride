@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
                         "001",
                         arrayOf(23, 42, 45, 48, 56, 60, 77, 81, 93),
                         LocalDateTime.of(2022, Month.FEBRUARY, 13, 16, 33),
-                        null,
+                        "",
                         "Maharashtra",
                         "Mumbai"
                 )
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
                         "002",
                         arrayOf(20, 39, 40, 42, 54, 63, 72, 88, 98),
                         LocalDateTime.of(2022, Month.MARCH, 15, 13, 0),
-                        null,
+                        "https://www.mapsofindia.com/maps/maharashtra/panvel-map.jpg",
                         "Maharashtra",
                         "Panvel"
                 )
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
                         "003",
                         arrayOf(13, 25, 41, 48, 59, 64, 75, 81, 91),
                         LocalDateTime.of(2022, Month.MARCH, 1, 9, 0),
-                        null,
+                        "",
                         "Maharashtra",
                         "Mumbai"
                 )
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
                         "004",
                         arrayOf(9, 16, 28, 41, 44, 53, 65, 77, 96),
                         LocalDateTime.of(2022, Month.FEBRUARY, 17, 12, 30),
-                        null,
+                        "",
                         "Maharashtra",
                         "Panvel"
                 )
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
                         "005",
                         arrayOf(10, 21, 33, 44, 63, 69, 75, 87, 98),
                         LocalDateTime.of(2022, Month.MARCH, 3, 8, 30),
-                        null,
+                        "",
                         "Manipur",
                         "Imphal West"
                 )
@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
                         "006",
                         arrayOf(3, 19, 34, 47, 52, 65, 75, 82, 98),
                         LocalDateTime.of(2022, Month.FEBRUARY, 28, 7, 15),
-                        null,
+                        "",
                         "Manipur",
                         "Chandel"
                 )
@@ -171,14 +171,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
 
     private fun initUserData(user: User) {
         findViewById<TextView>(R.id.user_name).text = user.getUserName()
-        val executor = Executors.newSingleThreadExecutor()
-        executor.execute{
-            val `in` = java.net.URL(user.getUserProfile()).openStream()
-            val imageBitmap= BitmapFactory.decodeStream(`in`)
-            findViewById<ImageView>(R.id.user_image).setImageBitmap(imageBitmap)
-        }
-
-        // Glide.with(this).load(user.getUserProfile()).into(findViewById<ImageView>(R.id.user_image))
+       //TODO: user image crash
     }
 
     override fun onClick(p0: View?) {
