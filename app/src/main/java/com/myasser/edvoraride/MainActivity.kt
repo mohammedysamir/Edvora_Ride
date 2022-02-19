@@ -1,6 +1,7 @@
 package com.myasser.edvoraride
 
 import android.app.Dialog
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
@@ -15,6 +16,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import java.time.LocalDateTime
 import java.time.Month
+import java.util.concurrent.Executors
 
 @RequiresApi(Build.VERSION_CODES.O)
 class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnItemSelectedListener {
@@ -113,7 +115,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
         user = User(
                 "Dhruv Singh",
                 40,
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2eN8ZS-WW7HqmiOGKHDdLV8qUEKOU5b3bZg&usqp=CAU"
+                "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZSUyMHBob3RvfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
         )
         initUserData(user)
 
@@ -169,7 +171,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
 
     private fun initUserData(user: User) {
         findViewById<TextView>(R.id.user_name).text = user.getUserName()
-        //TODO: be able to initiate user's image from URL
+        val executor = Executors.newSingleThreadExecutor()
+        executor.execute{
+            val `in` = java.net.URL(user.getUserProfile()).openStream()
+            val imageBitmap= BitmapFactory.decodeStream(`in`)
+            findViewById<ImageView>(R.id.user_image).setImageBitmap(imageBitmap)
+        }
+
         // Glide.with(this).load(user.getUserProfile()).into(findViewById<ImageView>(R.id.user_image))
     }
 
